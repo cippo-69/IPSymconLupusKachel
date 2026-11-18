@@ -1,97 +1,5 @@
-<style>
-:root {
-  --lk-bg: rgba(0,0,0,.045);
-  --lk-bg2: rgba(0,0,0,.075);
-  --lk-line: rgba(0,0,0,.12);
-  --lk-muted: rgba(0,0,0,.52);
-  --lk-top: 58px;          /* Platz für Titel und Vergrößern-Symbol der Symcon-Kachel */
-}
-/* Farben aus dem Modul „Visu Design“ (--w5-*); die Werte nach dem Komma gelten ohne Design-Instanz */
-body {
-  --lk-accent: var(--w5-accent, #2F6B4F);
-  --lk-warn: var(--w5-warn, #9A5200);
-  --lk-bad: var(--w5-alarm, #C8321F);
-  --lk-on: var(--w5-on, #fff);
-  --lk-fg: var(--w5-fg, #1E2224);
-}
-body.dark {
-  --lk-accent: var(--w5-accent, #74B892);
-  --lk-warn: var(--w5-warn, #EE9A45);
-  --lk-bad: var(--w5-alarm, #FF5A47);
-  --lk-on: var(--w5-on, #1E2224);
-  --lk-fg: var(--w5-fg, #F1F0EB);
-  --lk-bg: rgba(255,255,255,.10);
-  --lk-bg2: rgba(255,255,255,.15);
-  --lk-line: rgba(255,255,255,.16);
-  --lk-muted: rgba(255,255,255,.6);
-}
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html, body { margin: 0; height: 100%; overflow: hidden; background: transparent; }
-body { font-family: 'Poppins', 'Work Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 14px; line-height: 1.35; }
-button { font: inherit; color: var(--lk-fg); }
-#lk, #lk div, #lk span, #lk b, #lk summary { color: var(--lk-fg); }
-#lk .lbl, #lk .sub, #lk .facts, #lk .facts span, #lk .kv span, #lk .hint, #lk .meta, #lk .m { color: var(--lk-muted); }
-#lk .bad, #lk .facts b.bad { color: var(--lk-bad); }
-#lk .badge { color: var(--lk-on); }
-#lk { position: absolute; inset: 0; padding: var(--lk-top) 16px 16px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-.lbl { font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
-
-.head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-.st { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.st .v { display: flex; align-items: center; gap: 10px; font-size: 26px; font-weight: 500; line-height: 1.1; }
-.dot { width: 12px; height: 12px; border-radius: 50%; flex: none; background: var(--lk-muted); }
-.dot.ok { background: var(--lk-accent); box-shadow: 0 0 0 4px rgba(116,184,146,.25); }
-.dot.armed { background: var(--lk-accent); box-shadow: 0 0 0 4px rgba(253,122,51,.25); }
-.dot.home { background: var(--lk-warn); }
-.dot.bad { background: var(--lk-bad); box-shadow: 0 0 0 4px rgba(255,90,71,.25); }
-.dot.pulse { background: var(--lk-bad); animation: pulse 1s infinite; }
-@keyframes pulse { 50% { opacity: .3; } }
-.sub { font-size: 12px; }
-.facts { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; font-size: 12px; text-align: right; flex: none; }
-.facts b { font-weight: 600; }
-.badges { display: flex; flex-wrap: wrap; gap: 6px; }
-.badge { font-size: 11px; font-weight: 600; letter-spacing: .03em; padding: 3px 9px; border-radius: 999px; background: var(--lk-bad); }
-.badge.warn { background: var(--lk-warn); }
-
-.card { background: var(--lk-bg); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
-.card.alarm { background: rgba(255,90,71,.16); border: 1px solid var(--lk-bad); }
-.row { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 28px; }
-.row .t { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-.row .t b { font-weight: 500; }
-.row .r { text-align: right; font-size: 13px; flex: none; max-width: 55%; }
-.card .row + .row, details .row { border-top: 1px solid var(--lk-line); padding-top: 8px; }
-details .row:first-of-type { margin-top: 10px; }
-
-.chip { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; padding: 5px 12px; border-radius: 999px; background: var(--lk-bg2); flex: none; white-space: nowrap; }
-.chip .dot { width: 9px; height: 9px; box-shadow: none; }
-.bar { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; font-size: 12px; }
-.bar .tr { grid-column: 1 / -1; height: 6px; border-radius: 3px; background: var(--lk-line); overflow: hidden; }
-.bar .tr i { display: block; height: 100%; background: var(--lk-accent); }
-.bar b { font-weight: 500; font-variant-numeric: tabular-nums; }
-.hint { font-size: 12px; }
-.meta { font-size: 11px; }
-.btn2 { min-height: 38px; border: 1px solid var(--lk-accent); background: none; border-radius: 999px; padding: 4px 14px; cursor: pointer; font-weight: 600; font-size: 13px; touch-action: manipulation; text-decoration: none; display: inline-flex; align-items: center; }
-#lk .btn2 { color: var(--lk-accent); }
-.btn2:disabled { opacity: .45; cursor: default; }
-.acts { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-
-details summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-details summary::-webkit-details-marker { display: none; }
-details summary::after { content: "▾"; font-size: 12px; }
-details[open] summary::after { content: "▴"; }
-details summary .sub { margin-left: auto; }
-
-@media (max-width: 420px) {
-  #lk { padding-left: 12px; padding-right: 12px; }
-  .st .v { font-size: 22px; }
-  .card { padding: 12px; }
-}
-body.compact #lk { gap: 8px; padding-bottom: 8px; }
-body.compact .more { display: none; }
-body.compact .st .v { font-size: 20px; }
-body.compact .card { padding: 8px 12px; gap: 6px; }
-</style>
-<div id="lk"></div>
+<!-- Layout und Farben kommen vollständig aus „Visu Design“ (W5D_GetCSS + W5D_GetTileCSS, Bausteine laut README); hier kein eigenes CSS -->
+<div id="lk" class="w5t fill"></div>
 <script>
 // open: aufgeklappte Abschnitte (bleiben beim Neuzeichnen so, wie der Nutzer sie gestellt hat)
 var LK = { s: null, offset: 0, open: {} };
@@ -119,12 +27,8 @@ function at(ts) {
   return (same ? '' : pad(d.getDate()) + '.' + pad(d.getMonth() + 1) + '. ') + pad(d.getHours()) + ':' + pad(d.getMinutes());
 }
 function num(v, d) { return v === null || v === undefined || v === '' ? '–' : Number(v).toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d }); }
-function theme() {
-  var b = document.body, m = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(getComputedStyle(b).color || ''), dark;
-  if (m) dark = (0.2126 * m[1] + 0.7152 * m[2] + 0.0722 * m[3]) / 255 > 0.5;
-  else dark = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-  b.classList.toggle('dark', dark);
-}
+/* Hell/Dunkel übernimmt W5D_GetTileJS (w5tTheme); ohne Design-Modul bleibt der helle Modus */
+function theme() { if (typeof w5tTheme === 'function') w5tTheme(); }
 function plural(n, one, more) { return n + ' ' + (n === 1 ? one : more); }
 
 /* Problem eines Geräts für die rechte Spalte (leer = alles in Ordnung) */
@@ -171,16 +75,16 @@ function render() {
   var big, cls, armed = modes.some(function (m) { return m.mode === 1; }), home = modes.some(function (m) { return m.mode === 2; });
   var txts = modes.map(function (m) { return m.txt; }).filter(function (t, i, a) { return a.indexOf(t) === i; });
   if (s.ok === false) { big = 'Nicht erreichbar'; cls = 'bad'; }
-  else if (s.alarm) { big = 'ALARM'; cls = 'pulse'; }
+  else if (s.alarm) { big = 'ALARM'; cls = 'bad'; }
   else {
     big = txts.length === 1 ? txts[0] : modes.map(function (m) { return 'B' + m.area + ' ' + m.txt; }).join(' · ');
-    cls = armed ? 'armed' : home ? 'home' : '';
+    cls = armed ? 'ok' : home ? 'warn' : '';
   }
   var sub = [];
   if (modes.length > 1 && txts.length === 1) sub.push('Bereich ' + modes.map(function (m) { return m.area; }).join(' + '));
   sub.push(s.ok === false ? 'zuletzt ok ' + at(s.ts) : 'Stand ' + at(s.ts));
   if (s.ok !== false && !s.alarm) sub.push('kein Alarm');
-  h += '<div class="head"><div class="st"><div class="v"><span class="dot ' + cls + '"></span>' + esc(big) + '</div>'
+  h += '<div class="head"><div class="st"><div class="v' + (cls === 'bad' ? ' bad' : '') + '"><span class="dot ' + cls + '"></span>' + esc(big) + '</div>'
     + '<div class="sub">' + esc(sub.join(' · ')) + '</div></div>'
     + '<div class="facts"><span>Offen <b' + (open ? ' class="bad"' : '') + '>' + open + '</b></span>'
     + '<span>Hinweise <b' + (issues.length ? ' class="bad"' : '') + '>' + issues.length + '</b></span>'
@@ -225,7 +129,7 @@ function render() {
       }
       var v = d.valve === null || d.valve === undefined ? null : Math.max(0, Math.min(100, Math.round(d.valve)));
       h += '<div class="row"><div class="t"><b>' + esc(raum) + '</b><span class="sub">' + esc([d.op, d.bat ? 'Batterie ok' : ''].filter(Boolean).join(' · ')) + '</span></div>'
-        + '<span class="r">' + num(d.ist, 1) + ' °C <span class="m">→ ' + num(d.soll, 1) + ' °C</span></span></div>';
+        + '<span class="r">' + num(d.ist, 1) + ' °C <span class="sub">→ ' + num(d.soll, 1) + ' °C</span></span></div>';
       if (v !== null) h += '<div class="bar"><span>Ventil</span><b>' + v + ' %</b><div class="tr"><i style="width:' + v + '%"></i></div></div>';
       if (!d.bat) h += '<div class="hint bad">Batterie leer</div>';
     });
@@ -237,7 +141,7 @@ function render() {
     var bn = '';
     s.notes.forEach(function (n) {
       bn += '<div class="row"><div class="t"><b>' + esc(n.label) + '</b>' + (n.info ? '<span class="sub">' + esc(n.info) + '</span>' : '') + '</div>'
-        + '<span class="chip"><span class="dot' + (n.on ? ' ok' : '') + '"></span>' + esc(n.state || (n.on ? 'aktiv' : 'aus')) + '</span></div>';
+        + '<span class="chip"><span class="dot sm' + (n.on ? ' ok' : '') + '"></span>' + esc(n.state || (n.on ? 'aktiv' : 'aus')) + '</span></div>';
     });
     h += section('notes', 'Funktionen', '', false, bn);
   }
@@ -245,7 +149,7 @@ function render() {
   // Wartung
   h += '<div class="card more"><span class="lbl">Abfrage</span>'
     + '<div class="row"><div class="t"><b>Zentrale</b><span class="sub">' + (s.ok === false ? 'antwortet nicht' : 'abgefragt ' + at(s.ts)) + ' · alle ' + esc(s.interval) + ' s · nur lesend</span></div>'
-    + '<div class="acts"><button class="btn2" data-act="Refresh">Aktualisieren</button>' + (s.web ? '<a class="btn2" href="' + esc(s.web) + '" target="_blank" rel="noopener">Zentrale</a>' : '') + '</div></div>'
+    + '<div class="acts"><button class="btn acc" data-act="Refresh">Aktualisieren</button>' + (s.web ? '<a class="btn acc" href="' + esc(s.web) + '" target="_blank" rel="noopener">Zentrale</a>' : '') + '</div></div>'
     + '</div>';
 
   el.innerHTML = h;
