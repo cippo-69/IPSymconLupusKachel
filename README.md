@@ -33,7 +33,7 @@ Dieses Konto darf ohne die Option „Moduswechsel durch User“ nicht scharf/uns
 
 ## Farben
 
-Die Kachel hat keine eigenen Farbeinstellungen. Die Farben kommen aus dem Modul [Visu Design](https://github.com/cippo-69/IPSymconVisuDesign) (CSS-Variablen `--w5-*`, heller Modus und Dark Mode). Ohne Design-Instanz gilt das Farbkonzept W5x. Ein Theme-Wechsel kommt ohne Neuladen an.
+Die Kachel hat kein eigenes CSS und keine eigenen Farbeinstellungen. Farben, Layout und Hell/Dunkel-Erkennung kommen aus dem Modul [Visu Design](https://github.com/cippo-69/IPSymconVisuDesign) ab Version 1.5 (`W5D_GetCSS`, `W5D_GetTileCSS`, `W5D_GetTileJS`). Ein Theme-Wechsel kommt ohne Neuladen an. Ohne Design-Instanz erscheint die Kachel ungestaltet.
 
 ## Lizenz
 
