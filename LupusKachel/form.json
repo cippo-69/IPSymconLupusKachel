@@ -1,0 +1,33 @@
+{
+    "elements": [
+        { "type": "Label", "caption": "Die Kachel liest Modus, Alarm, Zustand der Zentrale und alle Geräte einer Lupus XT1 Plus / XT2 Plus / XT3 (nur lesend)." },
+        { "type": "ValidationTextBox", "name": "Host", "caption": "Adresse der Zentrale (IP oder Hostname)", "width": "400px" },
+        { "type": "RowLayout", "items": [
+            { "type": "ValidationTextBox", "name": "Username", "caption": "Benutzer", "width": "200px" },
+            { "type": "PasswordTextBox", "name": "Password", "caption": "Passwort", "width": "200px" }
+        ] },
+        { "type": "Label", "caption": "Empfehlung: eigenes Lupus-Konto „user“ (nur Anzeige) verwenden, nicht admin." },
+        { "type": "NumberSpinner", "name": "Interval", "caption": "Abfragen alle", "suffix": " s", "minimum": 10, "maximum": 3600 },
+        { "type": "CheckBox", "name": "ShowWebLink", "caption": "Link zur Weboberfläche der Zentrale in der Kachel zeigen" },
+        { "type": "Label", "caption": "Farben: zentral im Modul „Visu Design“ (Farbkonzept W5x)." },
+        { "type": "ExpansionPanel", "caption": "Funktionen (eigene Hinweise in der Kachel, optional)", "items": [
+            { "type": "Label", "caption": "Freie Liste, z. B. was in IP-Symcon mit der Anlage geschaltet werden darf. Erscheint als Karte „Funktionen“." },
+            { "type": "List", "name": "Notes", "caption": "Funktionen", "add": true, "delete": true, "changeOrder": true, "rowCount": 8,
+              "columns": [
+                { "caption": "Funktion", "name": "Label", "width": "260px", "add": "", "edit": { "type": "ValidationTextBox" } },
+                { "caption": "Aktiv", "name": "Active", "width": "70px", "add": true, "edit": { "type": "CheckBox" } },
+                { "caption": "Status", "name": "State", "width": "120px", "add": "aktiv", "edit": { "type": "ValidationTextBox" } },
+                { "caption": "Hinweis", "name": "Info", "width": "auto", "add": "", "edit": { "type": "ValidationTextBox" } }
+              ] }
+        ] }
+    ],
+    "actions": [
+        { "type": "Button", "caption": "Jetzt abfragen", "onClick": "echo LUPK_Update($id) ? 'OK' : 'Zentrale antwortet nicht (siehe Kachel bzw. Debug)';" }
+    ],
+    "status": [
+        { "code": 102, "icon": "active", "caption": "Aktiv" },
+        { "code": 104, "icon": "inactive", "caption": "Adresse, Benutzer oder Passwort fehlt" },
+        { "code": 201, "icon": "error", "caption": "Zentrale nicht erreichbar" },
+        { "code": 202, "icon": "error", "caption": "Anmeldung abgelehnt (Benutzer/Passwort)" }
+    ]
+}

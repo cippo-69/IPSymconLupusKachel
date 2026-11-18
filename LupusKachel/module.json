@@ -1,0 +1,14 @@
+{
+    "id": "{A8911C25-9645-4F63-8A6E-857019741F3B}",
+    "name": "LupusKachel",
+    "type": 3,
+    "vendor": "",
+    "aliases": [
+        "Lupus Kachel"
+    ],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "LUPK",
+    "url": "https://github.com/cippo-69/IPSymconLupusKachel"
+}
