@@ -84,7 +84,7 @@ class LupusKachel extends IPSModule
     public function GetVisualizationTile()
     {
         $initial = '<script>handleMessage(' . json_encode(json_encode($this->BuildState())) . ');</script>';
-        return $this->DesignStyle() . file_get_contents(__DIR__ . '/module.html') . $initial;
+        return $this->DesignStyle() . file_get_contents(__DIR__ . '/module.html') . $this->DesignScript() . $initial;
     }
 
     public function RequestAction($Ident, $Value)
@@ -350,10 +350,21 @@ class LupusKachel extends IPSModule
         return $ids[0] ?? 0;
     }
 
+    /** Farben und Kachel-Bausteine aus Visu Design (ab 1.5); die Kachel bringt kein eigenes CSS mit */
     private function DesignCSS(): string
     {
         $id = $this->DesignID();
-        return $id > 0 && function_exists('W5D_GetCSS') ? W5D_GetCSS($id) : '';
+        if ($id <= 0 || !function_exists('W5D_GetCSS')) {
+            return '';
+        }
+        return W5D_GetCSS($id) . (function_exists('W5D_GetTileCSS') ? W5D_GetTileCSS($id) : '');
+    }
+
+    /** Hell/Dunkel-Erkennung (w5tTheme) aus Visu Design */
+    private function DesignScript(): string
+    {
+        $id = $this->DesignID();
+        return $id > 0 && function_exists('W5D_GetTileJS') ? '<script>' . W5D_GetTileJS($id) . '</script>' : '';
     }
 
     private function WatchDesign(): void
